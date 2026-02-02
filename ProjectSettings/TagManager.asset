@@ -2,8 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - Boss
+  - Health Item
   layers:
   - Default
   - TransparentFX
@@ -11,24 +14,24 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - Player Bullet
+  - Player Shot
+  - Player Hit
   - 
   - 
   - 
+  - Enemy
+  - Enemy Bullet
+  - Enemy Shot
+  - Enemy Hit
   - 
   - 
+  - Boss
+  - Boss Bullet
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Collectable
   - 
   - 
   - 
@@ -41,3 +44,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2477141475
+    locked: 0
+  - name: Midground
+    uniqueID: 899230345
+    locked: 0
+  - name: Foreground
+    uniqueID: 529666853
+    locked: 0
+  m_RenderingLayers:
+  - Default
