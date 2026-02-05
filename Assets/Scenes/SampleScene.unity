@@ -971,6 +971,7 @@ GameObject:
   - component: {fileID: 811923692}
   - component: {fileID: 811923691}
   - component: {fileID: 811923693}
+  - component: {fileID: 811923694}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1063,7 +1064,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8ccab3fe32af748bb9bb4731d0b689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combos: []
+  combos:
+  - hits:
+    - animation: Attack1
+      inputButton: Fire1
+      animationTime: 0.35
+      resetTime: 0.6
+      damage: 1
+      hitSound: {fileID: 8300000, guid: 2f9513e7769a4db4d9cc1ebbfb10f3a7, type: 3}
+      slowDown: 0
+    - animation: Attack2
+      inputButton: Fire1
+      animationTime: 0.2
+      resetTime: 0.5
+      damage: 1
+      hitSound: {fileID: 8300000, guid: 3e00fb807ba9b8443afd7b55fda31830, type: 3}
+      slowDown: 0
+    - animation: Attack1
+      inputButton: Fire1
+      animationTime: 0.35
+      resetTime: 0.4
+      damage: 2
+      hitSound: {fileID: 8300000, guid: 2f9513e7769a4db4d9cc1ebbfb10f3a7, type: 3}
+      slowDown: 0
+  - hits:
+    - animation: Attack1
+      inputButton: Fire1
+      animationTime: 0.35
+      resetTime: 0.6
+      damage: 1
+      hitSound: {fileID: 8300000, guid: 2f9513e7769a4db4d9cc1ebbfb10f3a7, type: 3}
+      slowDown: 0
+    - animation: Attack2
+      inputButton: Fire1
+      animationTime: 0.2
+      resetTime: 0.5
+      damage: 1
+      hitSound: {fileID: 8300000, guid: 3e00fb807ba9b8443afd7b55fda31830, type: 3}
+      slowDown: 0
+    - animation: Attack3
+      inputButton: Fire1
+      animationTime: 0.35
+      resetTime: 0.5
+      damage: 3
+      hitSound: {fileID: 8300000, guid: b0179846ff5c56c49bdaa33076264e05, type: 3}
+      slowDown: 1
+  - hits:
+    - animation: Attack2
+      inputButton: Fire2
+      animationTime: 0.2
+      resetTime: 0.5
+      damage: 1
+      hitSound: {fileID: 8300000, guid: 3e00fb807ba9b8443afd7b55fda31830, type: 3}
+      slowDown: 0
+    - animation: Attack3
+      inputButton: Fire2
+      animationTime: 0.35
+      resetTime: 0.5
+      damage: 2
+      hitSound: {fileID: 8300000, guid: b0179846ff5c56c49bdaa33076264e05, type: 3}
+      slowDown: 0
+--- !u!95 &811923694
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811923690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 351ec41db912b154bad91654276e1c27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &823698854
 GameObject:
   m_ObjectHideFlags: 0

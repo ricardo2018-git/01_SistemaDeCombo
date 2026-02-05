@@ -19,5 +19,5 @@ public class Hit
 
     public int damage;          // Dano
     public AudioClip hitSound;  // Som se o hit atingir o inimigo
-    public bool slowDown;       // 
+    public bool slowDown;       // Sinaliza que é um ataque mais forte
 }
