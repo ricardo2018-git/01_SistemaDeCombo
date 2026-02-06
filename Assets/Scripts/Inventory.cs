@@ -26,12 +26,13 @@ public class Inventory : MonoBehaviour
         if (inventoryInstance == null)        // Verifica se a instancia é nula
         {
             inventoryInstance = this;         // Gera instancia desse script
+            transform.parent = null;
+            DontDestroyOnLoad(gameObject);  // Não deixa destruir esse script entre cena ou quando recarregar cena
         }
         else if (inventoryInstance != this)   // Verifica se a instancia é diferente desse obj
         {
             Destroy(gameObject);        // Destroi obj de cena
         }
-        DontDestroyOnLoad(gameObject);  // Não deixa destruir esse script entre cena ou quando recarregar cena
     }
 
     void Start()
