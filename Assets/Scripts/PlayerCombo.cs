@@ -13,11 +13,14 @@ public class PlayerCombo : MonoBehaviour
     // ------------------------
 
     // Controle lógico
-    private bool startCombo;        // Controla combo
+    private bool startCombo;            // Controla combo
     public List<string> currentCombo;   // Vai guardando os imputs pressionado
+    private float comboTimer;           // Cronometro
     // ------------------------
 
     // Variaveis de Armas, Ataque, Prefab, Game Object e Audio
+    private Hit currentHit;     // Hit atual
+    private Hit nextHit;        // Proximo hit
     // ------------------------
 
     // UI
@@ -44,7 +47,7 @@ public class PlayerCombo : MonoBehaviour
         {
             if (combos[i].hits.Length >= currentCombo.Count)     // Filtro para ele olhar apenas os que for igual ou maior na quantidade de hits. Caso tenha menos ele nem perde tempo em olhar ja vai para proximo
             {
-                if (Input.GetButtonDown(combos[i].hits[currentCombo.Count].inputButton))  // Verifica se esta pressionando botão do hit correspondente
+                if (currentCombo.Count < combos[i].hits.Length && Input.GetButtonDown(combos[i].hits[currentCombo.Count].inputButton))  // Verifica se esta pressionando botão do hit correspondente
                 {
                     if(currentCombo.Count == 0)     // Verifica se é o primeiro 
                     {
@@ -72,7 +75,7 @@ public class PlayerCombo : MonoBehaviour
                         if (comboMatch) // Verifica se comboMatch é verdadeiro
                         {
                             Debug.Log("Hit adicionado ao combo");           // Log
-                            PlayHit(combos[i].hits[currentCombo.Count]);    // Executa animação do combo i do ultimo hit
+                            nextHit = combos[i].hits[currentCombo.Count];   // Set proximo hit com animação do combo i do ultimo hit
                             break;                                          // Sai do loop
                         }
                     }
@@ -80,17 +83,35 @@ public class PlayerCombo : MonoBehaviour
                 }
             }
         }
+
+        if (startCombo)     // Verifica se é verdadeiro
+        {
+            comboTimer += Time.deltaTime;   // Inicia cronometro
+            if(comboTimer >= currentHit.animationTime)  // Verifica se o cronometro é maior ou igual ao tempo da animação do hit atual
+            {
+                PlayHit(nextHit);   // Executa proximo hit
+            }
+            if(comboTimer >= currentHit.resetTime)  // Verifica se cronometro é maior ou igual ao resetTime do hit atual
+            {
+                ResetCombo();   // Reseta combo
+            }
+        }
     }
 
     void PlayHit(Hit hit)              // Ataque
     {
+        comboTimer = 0;                     // Reseta cronometro
         anim.Play(hit.animation);           // Roda animação que recebeu
         startCombo = true;                  // Sinaliza que iniciou combo
         currentCombo.Add(hit.inputButton);  // Adiciona na lista de o imput pressionado
+        currentHit = hit;                   // Set hit atual com hit recebido no parametro
     }
 
     void ResetCombo()           // Reseta sequencia
     {
         startCombo = false;              // Sinaliza que finalizou combo
+        comboTimer = 0;                  // Reseta cronometro
+        currentCombo.Clear();            // Limpa lista de combos
+        anim.Rebind();                   // Volta para valor padrão do animation
     }
 }
