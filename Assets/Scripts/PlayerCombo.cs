@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.ShortcutManagement;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class PlayerCombo : MonoBehaviour
     private bool startCombo;            // Controla combo
     public List<string> currentCombo;   // Vai guardando os imputs pressionado
     private float comboTimer;           // Cronometro
+    private bool canHit = true;         // Controla se pode aperta o btn de Hit ou não
+    private bool resetCombo;            // Reset do combo
     // ------------------------
 
     // Variaveis de Armas, Ataque, Prefab, Game Object e Audio
@@ -43,6 +46,11 @@ public class PlayerCombo : MonoBehaviour
 
     void CheckInputs()         // Verifica os inputs de entrada
     {
+        if((Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) && !canHit)   // Verifica se apertou btn esquerdo ou direito do mouse E btn do hit esta falso
+        {
+            resetCombo = true;      // Sinaliza para resetar combo
+        }
+
         for(int i = 0; i < combos.Length; i++)  // Percorre todos combos
         {
             if (combos[i].hits.Length >= currentCombo.Count)     // Filtro para ele olhar apenas os que for igual ou maior na quantidade de hits. Caso tenha menos ele nem perde tempo em olhar ja vai para proximo
@@ -72,10 +80,11 @@ public class PlayerCombo : MonoBehaviour
                             }
                         }
 
-                        if (comboMatch) // Verifica se comboMatch é verdadeiro
+                        if (comboMatch && canHit) // Verifica se comboMatch é verdadeiro E se pode aperta o btn de hit
                         {
                             Debug.Log("Hit adicionado ao combo");           // Log
                             nextHit = combos[i].hits[currentCombo.Count];   // Set proximo hit com animação do combo i do ultimo hit
+                            canHit = false;                                 // Não deixa aperta o btn de hit
                             break;                                          // Sai do loop
                         }
                     }
@@ -87,9 +96,15 @@ public class PlayerCombo : MonoBehaviour
         if (startCombo)     // Verifica se é verdadeiro
         {
             comboTimer += Time.deltaTime;   // Inicia cronometro
-            if(comboTimer >= currentHit.animationTime)  // Verifica se o cronometro é maior ou igual ao tempo da animação do hit atual
+            if(comboTimer >= currentHit.animationTime && !canHit)  // Verifica se o cronometro é maior ou igual ao tempo da animação do hit atual E se Não pode aperta o btn de hit
             {
                 PlayHit(nextHit);   // Executa proximo hit
+                if (resetCombo)     // Verifica se pode resetar o combo
+                {
+                    canHit = false;     // Não deixa apertar btn de hit
+                    CancelInvoke();     // Cancela qualquer invoke q ja tenha sido chamado
+                    Invoke("ResetCombo", currentHit.animationTime); // Executa função em x tempo
+                }
             }
             if(comboTimer >= currentHit.resetTime)  // Verifica se cronometro é maior ou igual ao resetTime do hit atual
             {
@@ -105,6 +120,7 @@ public class PlayerCombo : MonoBehaviour
         startCombo = true;                  // Sinaliza que iniciou combo
         currentCombo.Add(hit.inputButton);  // Adiciona na lista de o imput pressionado
         currentHit = hit;                   // Set hit atual com hit recebido no parametro
+        canHit = true;                      // Pode aperta btn de hit
     }
 
     void ResetCombo()           // Reseta sequencia
@@ -113,5 +129,6 @@ public class PlayerCombo : MonoBehaviour
         comboTimer = 0;                  // Reseta cronometro
         currentCombo.Clear();            // Limpa lista de combos
         anim.Rebind();                   // Volta para valor padrão do animation
+        canHit = true;                      // Pode aperta btn de hit
     }
 }
