@@ -7,6 +7,7 @@ public class PlayerCombo : MonoBehaviour
 {
     // Scripts
     public Combo[] combos;          // Pode ter varios combos
+    public Attack attack;           // publico pq ele inicia desativado ai vamos referenciar pela unity não via script
     // ------------------------
 
     // Componentes
@@ -120,6 +121,7 @@ public class PlayerCombo : MonoBehaviour
         startCombo = true;                  // Sinaliza que iniciou combo
         currentCombo.Add(hit.inputButton);  // Adiciona na lista de o imput pressionado
         currentHit = hit;                   // Set hit atual com hit recebido no parametro
+        attack.SetAttack(hit);              // Configura ataque
         canHit = true;                      // Pode aperta btn de hit
     }
 
