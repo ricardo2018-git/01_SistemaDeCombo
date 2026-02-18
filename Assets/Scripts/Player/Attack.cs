@@ -36,4 +36,13 @@ public class Attack : MonoBehaviour
         slowDown = hit.slowDown;    // Recebe se desativa ou não do hit
         hitSound = hit.hitSound;    // Recebe som do hit
     }
+
+    private void OnTriggerEnter2D(Collider2D other) // Quando entrar em colisão
+    {
+        Damage enemy = other.GetComponent<Damage>();    // Cria instancia do enemy
+        if(enemy != null)                               // Verifica se realmnete é um enemy
+        {
+            enemy.TakeDamage(damage);                   // Acessa enemy e aplica dano passando a força do golpe
+        }
+    }
 }

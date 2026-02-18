@@ -117,11 +117,11 @@ public class PlayerCombo : MonoBehaviour
     void PlayHit(Hit hit)              // Ataque
     {
         comboTimer = 0;                     // Reseta cronometro
+        attack.SetAttack(hit);              // Configura ataque
         anim.Play(hit.animation);           // Roda animação que recebeu
         startCombo = true;                  // Sinaliza que iniciou combo
         currentCombo.Add(hit.inputButton);  // Adiciona na lista de o imput pressionado
         currentHit = hit;                   // Set hit atual com hit recebido no parametro
-        attack.SetAttack(hit);              // Configura ataque
         canHit = true;                      // Pode aperta btn de hit
     }
 
