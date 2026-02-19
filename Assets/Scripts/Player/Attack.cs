@@ -3,6 +3,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     // Scripts
+    public AudioPlayer audioPlayer;     // Script para tocar musica
     // ------------------------
 
     // Componentes
@@ -42,7 +43,10 @@ public class Attack : MonoBehaviour
         Damage enemy = other.GetComponent<Damage>();    // Cria instancia do enemy
         if(enemy != null)                               // Verifica se realmnete é um enemy
         {
+            audioPlayer.PlaySound(hitSound);            // Acessa script de audio e pede para tocar musica ou som
             enemy.TakeDamage(damage);                   // Acessa enemy e aplica dano passando a força do golpe
+            if(slowDown)                                // Verifica se SlowDown esta ativo para esse golpe
+                SlowDown.instance.SetSlowDown();        // Acessa script de SlowDown e executa
         }
     }
 }
