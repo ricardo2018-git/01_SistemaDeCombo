@@ -47,6 +47,8 @@ public class Attack : MonoBehaviour
             enemy.TakeDamage(damage);                   // Acessa enemy e aplica dano passando a força do golpe
             if(slowDown)                                // Verifica se SlowDown esta ativo para esse golpe
                 SlowDown.instance.SetSlowDown();        // Acessa script de SlowDown e executa
+
+            UIManager.instance.SetCombo();              // 
         }
     }
 }

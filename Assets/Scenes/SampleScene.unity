@@ -3921,6 +3921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1352112995}
+  - component: {fileID: 1352112996}
   m_Layer: 0
   m_Name: CanvasUI
   m_TagString: Untagged
@@ -3945,6 +3946,21 @@ Transform:
   - {fileID: 1121880271}
   m_Father: {fileID: 2084081019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1352112996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352112994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8720b73337a7147ba9b10461883034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetTime: 2
+  healthText: {fileID: 0}
+  comboText: {fileID: 1378345290}
 --- !u!1 &1370930117
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,7 +4520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8720b73337a7147ba9b10461883034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetTime: 2
   healthText: {fileID: 0}
+  comboText: {fileID: 0}
 --- !u!1 &1893828098
 GameObject:
   m_ObjectHideFlags: 0
