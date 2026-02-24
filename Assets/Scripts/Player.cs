@@ -48,11 +48,11 @@ public class Player : MonoBehaviour
         // Associa Componentes
         //sprite = GetComponent<SpriteRenderer>();    // Acessa componente
         //rb = GetComponent<Rigidbody2D>();           // Acessa componente
-        //anim = GetComponent<Animator>();            // Acessa componente
+        anim = GetComponent<Animator>();            // Acessa componente
 
         // Inicia: Controle lógico, metodos e funções
-        health = gameManagerInstance.health;        // Recebe qts de vidas
-        maxHealth = gameManagerInstance.maxHealth;   // Recebe qts de vida maxima
+        //health = gameManagerInstance.health;        // Recebe qts de vidas
+        //maxHealth = gameManagerInstance.maxHealth;   // Recebe qts de vida maxima
         
         // Associa Armas, Ataque, Prefab e Game Object
     }
@@ -74,7 +74,17 @@ public class Player : MonoBehaviour
     {
         if (!isDead || !gameManagerInstance.gameOver)    // Verifica se Player esta Vivo
         {
-            
+            float h = Input.GetAxisRaw("Horizontal");   // Pega valor dos direcionais. Não pega aceleração já vai para valor maximo
+            transform.Translate(Vector2.right * h * 5 * Time.deltaTime);    // Move player
+            if (h > 0 && !facingRight)                              // Verifica se Player esta indo para direita e seu rosta esta para esquerda
+            {
+                Flip();                                             // Vira Player para direita
+            }
+            else if (h < 0 && facingRight)                          // Verifica se Player esta indo para esquerda e seu rosto esta para dirieta
+            {
+                Flip();                                             // Vira Player para esquerda
+            }
+            anim.SetFloat("Speed", Mathf.Abs(h));
         }
         else
         {
