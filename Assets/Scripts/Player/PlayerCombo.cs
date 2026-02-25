@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditor.ShortcutManagement;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Events;           // Trabalhar com eventos
 
 public class PlayerCombo : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerCombo : MonoBehaviour
     private float comboTimer;           // Cronometro
     private bool canHit = true;         // Controla se pode aperta o btn de Hit ou não
     private bool resetCombo;            // Reset do combo
+    public UnityEvent OnStartCombo, OnFinishCombo;   // Inica e termina evento
     // ------------------------
 
     // Variaveis de Armas, Ataque, Prefab, Game Object e Audio
@@ -60,6 +62,7 @@ public class PlayerCombo : MonoBehaviour
                 {
                     if(currentCombo.Count == 0)     // Verifica se é o primeiro 
                     {
+                        OnStartCombo.Invoke();                           // Inicia evento. Só para Desablitar o script para player para de andar quando estiver atacando
                         Debug.Log("Primeiro hit foi adicionado");        // Log
                         PlayHit(combos[i].hits[currentCombo.Count]);     // Chama função para executar animação do hit
                         break;                                           // Finaliza loop
@@ -127,10 +130,12 @@ public class PlayerCombo : MonoBehaviour
 
     void ResetCombo()           // Reseta sequencia
     {
+        resetCombo = false;              // Combo resetado
+        OnFinishCombo.Invoke();          // Finaliza envento. Para Habilitar o script para player voltar a andar quando terminar ataque
         startCombo = false;              // Sinaliza que finalizou combo
         comboTimer = 0;                  // Reseta cronometro
         currentCombo.Clear();            // Limpa lista de combos
         anim.Rebind();                   // Volta para valor padrão do animation
-        canHit = true;                      // Pode aperta btn de hit
+        canHit = true;                   // Pode aperta btn de hit
     }
 }
